@@ -72,20 +72,27 @@ app.delete('/api/notes/:id', (req, res) => {
 app.post(`/api/notes`, (req, res) => {
   console.log(Array.isArray(notes))
   
-  req.body = {
-    id: genId(notes),
-    content: "Message is of different types",
-    date: new Date(),
-    important: true
-  }
+  req.body = {};
 
+  req.body.id = genId(notes),
+  req.body.content = "Message is of different types",
+  req.body.date = new Date(),
+  req.body.important = true
+
+// check if the notes is still an array
   console.log(Array.isArray(notes))
-  // notes = notes.push(req.body)
+  // add this body to the array
+  notes = [...notes, req.body]
+  // check again if the notes is still an array
   console.log(Array.isArray(notes))
+  // display the updated notes
   console.log(notes);
+  // check the body
   console.log(req.body)
-  console.log(Array.isArray(notes))
-  res.json(req.body)
+  // check the total number of books
+  console.log(`There are ${notes.length} notes in database`)
+  
+  res.json(notes)
 })
 
 
